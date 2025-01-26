@@ -197,7 +197,7 @@ class Raytracer:
                     double_sided=double_sided,
                     beam_angle=beam_angle,
                 ),
-                name=str(mesh.uid),
+                name=str(mesh._id),
                 revert_dir=revert_dir,
             )
         )

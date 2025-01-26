@@ -9,7 +9,7 @@ def gs_rand_float(lower, upper, shape, device):
 
 
 class Go2Env:
-    def __init__(self, num_envs, env_cfg, obs_cfg, reward_cfg, command_cfg, show_viewer=False, device="cuda"):
+    def __init__(self, num_envs, env_cfg, obs_cfg, reward_cfg, command_cfg, show_viewer=True, device="cuda"):
         self.device = torch.device(device)
 
         self.num_envs = num_envs
@@ -19,7 +19,7 @@ class Go2Env:
         self.num_commands = command_cfg["num_commands"]
 
         self.simulate_action_latency = True  # there is a 1 step latency on real robot
-        self.dt = 0.02  # control frequency on real robot is 50hz
+        self.dt = 0.02  # control frequence on real robot is 50hz
         self.max_episode_length = math.ceil(env_cfg["episode_length_s"] / self.dt)
 
         self.env_cfg = env_cfg

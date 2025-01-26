@@ -1,5 +1,6 @@
-import genesis as gs
 import numpy as np
+
+import genesis as gs
 
 ########################## init ##########################
 gs.init(backend=gs.gpu)
@@ -14,6 +15,7 @@ scene = gs.Scene(
     ),
     sim_options=gs.options.SimOptions(
         dt=0.01,
+        substeps=4,  # for more stable grasping contact
     ),
     show_viewer=True,
 )
@@ -75,10 +77,9 @@ for i in range(100):
 # reach
 qpos = franka.inverse_kinematics(
     link=end_effector,
-    pos=np.array([0.65, 0.0, 0.130]),
+    pos=np.array([0.65, 0.0, 0.135]),
     quat=np.array([0, 1, 0, 0]),
 )
-print(qpos)
 franka.control_dofs_position(qpos[:-2], motors_dof)
 for i in range(100):
     scene.step()
@@ -93,10 +94,9 @@ for i in range(100):
 # lift
 qpos = franka.inverse_kinematics(
     link=end_effector,
-    pos=np.array([0.65, 0.0, 0.28]),
+    pos=np.array([0.65, 0.0, 0.3]),
     quat=np.array([0, 1, 0, 0]),
 )
-print(qpos)
 franka.control_dofs_position(qpos[:-2], motors_dof)
 for i in range(200):
     scene.step()

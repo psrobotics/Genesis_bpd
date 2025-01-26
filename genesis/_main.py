@@ -252,8 +252,6 @@ def main():
         view(args.filename, args.collision, args.rotate, args.scale)
     elif args.command == "animate":
         animate(args.filename_pattern, args.fps)
-    elif args.command == None:
-        parser.print_help()
 
 
 if __name__ == "__main__":

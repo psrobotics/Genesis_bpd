@@ -14,29 +14,15 @@ import OpenGL
 
 import genesis as gs
 
-import sys
-
-if sys.platform.startswith("darwin"):
-    # Mac OS
-    from tkinter import Tk
-    from tkinter import filedialog
-else:
-    try:
-        from Tkinter import Tk
-        from Tkinter import tkFileDialog as filedialog
-    except Exception:
-        try:
-            from tkinter import Tk
-            from tkinter import filedialog as filedialog
-        except Exception:
-            pass
-
-
 try:
-    root = Tk()
-    root.withdraw()
-except:
-    pass
+    from Tkinter import Tk
+    from Tkinter import tkFileDialog as filedialog
+except Exception:
+    try:
+        from tkinter import Tk
+        from tkinter import filedialog as filedialog
+    except Exception:
+        pass
 
 import pyglet
 from moviepy.video.io.ffmpeg_writer import FFMPEG_VideoWriter
@@ -208,6 +194,7 @@ class Viewer(pyglet.window.Window):
         plane_reflection=False,
         **kwargs,
     ):
+
         #######################################################################
         # Save attributes and flags
         #######################################################################
@@ -981,6 +968,7 @@ class Viewer(pyglet.window.Window):
         }
         filetypes = [file_types[x] for x in file_exts]
         try:
+            root = Tk()
             save_dir = self.viewer_flags["save_directory"]
             if save_dir is None:
                 save_dir = os.getcwd()
@@ -990,6 +978,7 @@ class Viewer(pyglet.window.Window):
         except Exception:
             return None
 
+        root.destroy()
         if filename == ():
             return None
         return filename
@@ -1158,14 +1147,7 @@ class Viewer(pyglet.window.Window):
                 # print('e1', time.time() - last_time); last_time = time.time()
 
             pyglet.clock.tick()
-
-            if gs.platform != "Windows":
-                pyglet.app.platform_event_loop.step(0.0)
-            else:
-                # even changing `platform_event_loop.step(0.0)` to 0.001 causes the viewer to hang on Windows
-                # this is a workaround on Windows. not sure if it's correct
-                time.sleep(0.001)
-
+            pyglet.app.platform_event_loop.step(0.0)
             self.switch_to()
             self.dispatch_pending_events()
             if self.is_active:

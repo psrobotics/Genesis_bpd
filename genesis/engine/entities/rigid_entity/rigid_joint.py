@@ -90,8 +90,7 @@ class RigidJoint(RBC):
     def _kernel_get_pos(self, tensor: ti.types.ndarray()):
 
         for i_b in range(self._solver._B):
-            I_l = [self._idx, i_b] if ti.static(self._solver._options.batch_links_info) else self._idx
-            l_info = self._solver.links_info[I_l]
+            l_info = self._solver.links_info[self._idx, i_b]
             i_p = l_info.parent_idx
 
             p_pos = ti.Vector.zero(gs.ti_float, 3)
@@ -125,8 +124,7 @@ class RigidJoint(RBC):
     def _kernel_get_quat(self, tensor: ti.types.ndarray()):
 
         for i_b in range(self._solver._B):
-            I_l = [self._idx, i_b] if ti.static(self._solver._options.batch_links_info) else self._idx
-            l_info = self._solver.links_info[I_l]
+            l_info = self._solver.links_info[self._idx, i_b]
             i_p = l_info.parent_idx
 
             p_pos = ti.Vector.zero(gs.ti_float, 3)
