@@ -40,7 +40,7 @@ class BpdEnv:
                 camera_fov=40,
             ),
             vis_options=gs.options.VisOptions(
-                n_rendered_envs=1, # how many envs to render
+                n_rendered_envs=32, # how many envs to render
                 background_color = (0.8, 0.8, 0.8),
                 contact_force_scale = 100.0,
                 ),
@@ -169,6 +169,7 @@ class BpdEnv:
             self.episode_sums[name] += rew
 
         # compute observations, modified with only 6 joints, obs_dim = 9+18=27
+        # observation = ang_vel, projected_gravity,......
         self.obs_buf = torch.cat(
             [
                 self.base_ang_vel * self.obs_scales["ang_vel"],  # 3

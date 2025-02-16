@@ -47,7 +47,7 @@ def main():
     reward_cfg["reward_scales"] = {}
 
     env = BpdEnv(
-        num_envs=1,
+        num_envs=32, # how many envs to eval
         env_cfg=env_cfg,
         obs_cfg=obs_cfg,
         reward_cfg=reward_cfg,
