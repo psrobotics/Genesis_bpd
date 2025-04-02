@@ -33,7 +33,7 @@ def lcm_handle(channel, data):
 def main():
     parser = argparse.ArgumentParser()
     # modified name
-    parser.add_argument("-e", "--exp_name", type=str, default="bpd-walking-0120-alldir")
+    parser.add_argument("-e", "--exp_name", type=str, default="bpd-walking-0327-alldir")
     parser.add_argument("--ckpt", type=int, default=6000)
     args = parser.parse_args()
 
@@ -78,6 +78,7 @@ def main():
             print(env.commands[envs_idx, :])
 
             actions = policy(obs)
+            print(actions[envs_idx, :])
             obs, _, rews, dones, infos = env.step(actions)
 
 

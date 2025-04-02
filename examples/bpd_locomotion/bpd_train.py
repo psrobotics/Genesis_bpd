@@ -119,8 +119,8 @@ def get_cfgs():
     }
     command_cfg = {
         "num_commands": 3,
-        "lin_vel_x_range": [-1.5, 1.5],
-        "lin_vel_y_range": [-1.5, 1.5],
+        "lin_vel_x_range": [-0.5, 0.5],
+        "lin_vel_y_range": [-0.5, 0.5],
         "ang_vel_range": [-1.9, 1.9],
     }
 
@@ -129,7 +129,7 @@ def get_cfgs():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-e", "--exp_name", type=str, default="bpd-walking-0124-fast")
+    parser.add_argument("-e", "--exp_name", type=str, default="bpd-walking-0327-alldir")
     # modified parallel env nums
     parser.add_argument("-B", "--num_envs", type=int, default=4096)
     parser.add_argument("--max_iterations", type=int, default=8000) # ori 100

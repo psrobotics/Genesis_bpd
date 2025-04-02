@@ -53,7 +53,7 @@ class BpdEnv:
             show_viewer=show_viewer,
         )
 
-        # add plain
+        # add plane
         self.scene.add_entity(gs.morphs.URDF(file="urdf/plane/plane_light.urdf", fixed=True))
 
         # add robot, modified to bpd rbt
@@ -61,8 +61,15 @@ class BpdEnv:
         self.base_init_quat = torch.tensor(self.env_cfg["base_init_quat"], device=self.device)
         self.inv_base_init_quat = inv_quat(self.base_init_quat)
         self.robot = self.scene.add_entity(
-            gs.morphs.URDF(
-                file="/home/ps/Documents/Genesis/genesis/assets/urdf/bpd_bai/bpd_bai_1.urdf",
+            # gs.morphs.URDF(
+            #    file="/home/ps/Documents/Genesis/genesis/assets/urdf/bpd_bai/bpd_bai_1.urdf",
+            #    #file="/home/ps/Documents/Genesis/genesis/assets/xml/bai_xml/bpd_bai_vis.xml",
+            #    pos=self.base_init_pos.cpu().numpy(),
+            #    quat=self.base_init_quat.cpu().numpy(),
+            # ),
+            gs.morphs.MJCF(
+                #file="/home/ps/Documents/Genesis/genesis/assets/urdf/bpd_bai/bpd_bai_1.urdf",
+                file="/home/ps/Documents/Genesis/genesis/assets/xml/bai_xml/bpd_bai_vis.xml",
                 pos=self.base_init_pos.cpu().numpy(),
                 quat=self.base_init_quat.cpu().numpy(),
             ),
