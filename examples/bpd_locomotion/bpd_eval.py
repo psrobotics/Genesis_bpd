@@ -34,7 +34,7 @@ def main():
     parser = argparse.ArgumentParser()
     # modified name
     parser.add_argument("-e", "--exp_name", type=str, default="bpd-walking-0327-alldir")
-    parser.add_argument("--ckpt", type=int, default=6000)
+    parser.add_argument("--ckpt", type=int, default=8000)
     args = parser.parse_args()
 
     gs.init() # genesis
